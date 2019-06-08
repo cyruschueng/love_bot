@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="shortcut icon" href="/love_bot/web/static/images/favicon.ico">
+    <title>恋爱聊天机器人 </title>
+    <meta name="keywords"
+          content="恋爱聊天机器人,语义理解,开放平台,自动应答程序,客服机器人,聊天机器人">
+    <meta name="description"
+          content="恋爱聊天机器人开放平台能让每个用户通过注册获得自己的个性化问答机器人。该机器人可以捆绑在自己微信公众号，可以部署在WEB网站上，可以通过我们提供的API 进行二次开发接入各类软件或者APP。用户可以通过我们提供的管理后台增加和编辑机器人的问答知识，建设知识库，将机器人用于客服、销售、招聘等方面，机器人会自动按照用户添加的问题和答案回答FAQ提问。我们擅于做上下文处理，对语义的理解更加精准。">
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" href="/love_bot/web/static/css/love.css"/>
+    <script type="text/javascript" src="/love_bot/web/static/js/jquery-2.2.3.min.js"></script>
+
+      <link rel="stylesheet" href="/love_bot/web/static/kddassets/bower_components/bootstrap/dist/css/bootstrap.css" type="text/css" />
+  <link rel="stylesheet" href="/love_bot/web/static/kddassets/bower_components/animate.css/animate.css" type="text/css" />
+  <link rel="stylesheet" href="/love_bot/web/static/kddassets/bower_components/font-awesome/css/font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="/love_bot/web/static/kddassets/bower_components/simple-line-icons/css/simple-line-icons.css" type="text/css" />
+  <link rel="stylesheet" href="/love_bot/web/static/kddassets/css/font.css" type="text/css" />
+
+  <link rel="stylesheet" href="/love_bot/web/static/kddassets/css/app.css" type="text/css" />
+  <!-- <link rel="stylesheet" href="/love_bot/web/static/js/diting1.0/pc/jquery.mCustomScrollbar.min.css" type="text/css" /> -->
+  <script type="text/javascript" src="/love_bot/web/static/js/jquery.mCustomScrollbar.concat.min.js"></script>
+ 
+    <script type="text/javascript" src="/love_bot/web/static/js/love-common.js"></script>
+    <script type="text/javascript" src="/love_bot/web/static/js/talk.js"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            talks();
+            $('#robotProfileP').html($('#profile').val());
+        }
+    </script>
+
+
+    <style>
+
+::-webkit-scrollbar  
+{  
+    width: 0px;  
+    height: 0px;  
+   
+}  
+.m-l-xxl-f  {float:left;     margin-left: 9px;}
+.m-r-xxl-f  {float:right;margin-right: 9px; }
+.m-b-c {
+
+     margin-bottom: 15px;
+    clear: both;
+}
+
+#content {
+    font-size: 16px;
+    width: 99%;
+    height: 438px;
+    overflow-y: auto;
+    padding: 5px 10px;
+}
+#container {
+      width: 100%;
+      height: 70%;
+  
+    }  </style>
+</head>
+<body style="background: #fff;">
+
+
+
+<div class="app-content-body " style="    position: fixed;">
+      
+
+<div class="">
+
+
+<!--==header开始==============================================-->
+
+<div id="tanchuang"></div>
+ 
+
+    <div id="container" >
+
+
+
+
+
+
+    <div class="row">
+<div class="">
+
+      <!-- chat -->
+      <div class="panel panel-default">
+        <div class="panel-heading" id="">
+	恋爱聊天机器人
+
+
+        </div>
+  
+   <div class="panel-body" id="content">
+
+    </div>
+
+
+  
+
+        <footer class="panel-footer">
+          <!-- chat form -->
+          <div>
+          
+            <form class="m-b-none" onsubmit="return false;">
+              <div class="input-group">
+      
+                <textarea type="text" id="text" class="form-control" placeholder="有事可以提问题，没事还能唠唠嗑..." rows="3" style="resize: none;"></textarea>
+              <span class="input-group-addon" id="btn">发送</span>
+              </div>
+            </form>
+          </div>
+        </footer>
+
+    </div>
+      <!-- /chat -->            
+      </div>
+
+
+
+
+
+
+    </div>
+
+
+    <div id="answerImgBigTC"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>    </div>
+
+</body>
+
