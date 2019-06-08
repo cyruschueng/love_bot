@@ -72,7 +72,7 @@ LICENSE and Conditions
 (This is so-called MIT/X License)
 
  
-欢迎 Star 和 Fork ~O(∩_∩)O哈哈~
+欢迎 Star 和 Fork ~ (∩_∩) ~
 
 
 如果你有什么问题请提 Issue， 
