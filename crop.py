@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """Utility functions for processing images for crop"""
 import os
-import pytesser
 import sys,time
 from PIL import Image,ImageEnhance
 import imghdr

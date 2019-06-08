@@ -39,6 +39,8 @@
  * 安装 chatterbot_corpus pip install chatterbot_corpus
  * 安装 hug pip install hug
  * 安装CV2 pip install opencv-python
+ * 安装OCR tesseract 
+ * 安装  pip install bottle
  * 下载此项目然后解压.
  * 执行 hug -f loveimgdeal.py
  * 执行下面可以测试:
@@ -51,7 +53,7 @@
 
 相关的项目
 ----------------
-
+ * <a href="https://github.com/tesseract-ocr/tesseract">tesseract</a>
  * <a href="https://github.com/gunthercox/ChatterBot">ChatterBot</a>
  * <a href="https://github.com/hugapi/hug">hug</a>
  * <a href="https://opencv.org/">opencv</a>
@@ -60,14 +62,13 @@ LICENSE and Conditions
 --------------------
 
 (This is so-called MIT/X License)
-
-Copyright (c) 2004-2016  Yusuke Shinyama <yusuke at shinyama dot jp>
-欢迎 Star 和 Fork ~
 ## 网络爬取了2万个对话
 
 ![](./scraper/get1.png)
-![](./scraper/get2.png)
  
+ 
+欢迎 Star 和 Fork ~
+
 
  
 
