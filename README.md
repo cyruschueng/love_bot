@@ -58,18 +58,21 @@
  * <a href="https://github.com/hugapi/hug">hug</a>
  * <a href="https://opencv.org/">opencv</a>
  
+
+
+ ## 网络爬取了2万个对话
+--------------------
+![](./scraper/get1.png)
+
+
+
 LICENSE and Conditions
 --------------------
 
 (This is so-called MIT/X License)
-## 网络爬取了2万个对话
-
-![](./scraper/get1.png)
- 
- 
-欢迎 Star 和 Fork ~
-
 
  
+欢迎 Star 和 Fork ~O(∩_∩)O哈哈~
+
 
 如果你有什么问题请提 Issue， 
