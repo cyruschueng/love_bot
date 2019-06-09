@@ -1,4 +1,4 @@
- 恋爱聊天机器人 ，分析微信，陌陌微博等聊天记录机器学习对话，送给直男直女的聊天技巧
+ 💘💘💘恋爱聊天机器人 ，分析微信，陌陌微博等聊天记录机器学习对话，送给想恋爱的男生女生的聊天技巧
 
 [![Build Status](https://travis-ci.org/euske/pdfminer.svg?branch=master)](https://github.com/cyruschueng/love_bot)[![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/cyruschueng/love_bot) [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)      
 
