@@ -99,9 +99,9 @@ function fakeMessage() {
 function talks() {
     getCode();
     var arrIcon = ['//j.kuaiduodian.com/assets/global/images/avatar.png', '//j.kuaiduodian.com/assets/global/images/avatar.png'];
-    if($('#headPortrait').val()!="" && $('#headPortrait').val()!="None"){
-        arrIcon[1]=$('#headPortrait').val()+'/thumbnail/100x100';
-    }
+    // if($('#headPortrait').val()!="" && $('#headPortrait').val()!="None"){
+    //     arrIcon[1]=$('#headPortrait').val()+'/thumbnail/100x100';
+    // }
 
     var iNow = -1;    //用来累加改变左右浮动
     var btn = document.getElementById('btn');
@@ -173,22 +173,21 @@ function talks() {
                 enable: $("#enable").val()
             };
             $.ajax({
-                type: "POST",
-                contentType: "application/json",
-                url: '/api/chat/info',
-                data: JSON.stringify(ques)
+                type: "get",
+                url: '/api_chat/get_response',
+                data: { user_input: question }
             }).done(function (data) {
-                var data = JSON.parse(data);
+           var data = {'response':data.response};//JSON.parse(data);
                 console.log(data)
                 if (data.mp3Url!=null && data.mp3Url!="null"){
-                    content.innerHTML += '<li><img class="headImg " src="' + arrIcon[1] + '"><span><b style="color:#333;">'+ $("#name").val() +'：</b>' + data.answer + '<br/><audio controls="controls" src="'+ data.mp3Url +'">您的浏览器不支持audio音乐播放。</audio><i>' + Hour + ':' + Min + '</i></span></li>';
+                    content.innerHTML += '<li><img class="headImg " src="' + arrIcon[1] + '"><span><b style="color:#333;">'+ $("#name").val() +'：</b>' + data.response + '<br/><audio controls="controls" src="'+ data.mp3Url +'">您的浏览器不支持audio音乐播放。</audio><i>' + Hour + ':' + Min + '</i></span></li>';
                     iNow++;
                     img[iNow].className += 'imgleft';
                     span[iNow].className += 'spanleft';
                 }else if(data.skip_url!=null && data.skip_url!="null"){
                     window.location.href = data.skip_url
                 }else if(data.img_url!=null && data.img_url!="null"){
-                    content.innerHTML += '<li><img class="headImg " src="' + arrIcon[1] + '"><span><b style="color:#333;">'+ $("#name").val() +'：</b>' + data.answer + '<br/><img class="answerImg" src="'+ data.img_url +'?imageMogr2/thumbnail/300x300" alt="'+ data.img_url + '"  onclick="answerImgBig(this.alt)"/><i>' + Hour + ':' + Min + '</i></span></li>';
+                    content.innerHTML += '<li><img class="headImg " src="' + arrIcon[1] + '"><span><b style="color:#333;">'+ $("#name").val() +'：</b>' + data.response + '<br/><img class="answerImg" src="'+ data.img_url +'?imageMogr2/thumbnail/300x300" alt="'+ data.img_url + '"  onclick="answerImgBig(this.alt)"/><i>' + Hour + ':' + Min + '</i></span></li>';
                     iNow++;
                     img[iNow].className += 'imgleft';
                     span[iNow].className += 'spanleft';
@@ -197,12 +196,12 @@ function talks() {
                     for(var i=0;i<data.changeBooks.length;i++ ){
                         strBook +='<div class="changeBook1" ><img class="answerImg"  src="'+ data.changeBooks[i].picture +'?imageMogr2/thumbnail/300x300" alt="'+  data.changeBooks[i].picture + '"/></div><div class="changeBook2" ><h5>'+  data.changeBooks[i].name + '</h5><h6>作者：'+  data.changeBooks[i].author + '</h6><h6 >分享者：'+  data.changeBooks[i].share + '</h6><h6 >价格：'+  data.changeBooks[i].price + '</h6></div><h6>简介：'+  data.changeBooks[i].synopsis + '</h6><br/>'
                     }
-                    content.innerHTML += '<li><img class="headImg " src="' + arrIcon[1] + '"><span><b style="color:#333;">'+ $("#name").val() +'：</b>' + data.answer + '<br/><br/><div >'+ strBook +'</div><i>' + Hour + ':' + Min + '</i></span></li>';
+                    content.innerHTML += '<li><img class="headImg " src="' + arrIcon[1] + '"><span><b style="color:#333;">'+ $("#name").val() +'：</b>' + data.response + '<br/><br/><div >'+ strBook +'</div><i>' + Hour + ':' + Min + '</i></span></li>';
                     iNow++;
                     img[iNow].className += 'imgleft';
                     span[iNow].className += 'spanleft';
                 } else {
-                    // content.innerHTML += '<li><img  class="headImg "  src="' + arrIcon[1] + '"><span><b style="color:#333;">'+ $("#name").val() +'：</b>' + data.answer + '<i>' + Hour + ':' + Min + '</i></span></li>';
+                    // content.innerHTML += '<li><img  class="headImg "  src="' + arrIcon[1] + '"><span><b style="color:#333;">'+ $("#name").val() +'：</b>' + data.response + '<i>' + Hour + ':' + Min + '</i></span></li>';
                     // iNow++;
                     // img[iNow].className += 'imgleft';
                     // span[iNow].className += 'spanleft';
@@ -214,7 +213,7 @@ function talks() {
             '<div class="m-l-xxl-f">'+
             '<div class="pos-rlt wrapper b b-light r r-2x">'+
             '<span class="arrow left pull-up"></span>'+
-            '<p class="m-b-none">' + data.answer + ' </p>'+
+            '<p class="m-b-none">' + data.response + ' </p>'+
             '</div>'+
             '<small class="text-muted" style="float:right;"><i class="fa fa-ok text-success"></i> ' + Hour + ':' + Min + '</small>'+
             '</div>'+
@@ -288,21 +287,20 @@ function talks() {
                 enable: $("#enable").val()
             };
             $.ajax({
-                type: "POST",
-                contentType: "application/json",
-                url: '/api/chat/info',
-                data: JSON.stringify(ques)
+               type: "get",
+                url: '/api_chat/get_response',
+                data: { user_input: question }
             }).done(function (data) {
-                var data = JSON.parse(data);
+                var data = {'response':data.response};//JSON.parse(data);
                 if (data.mp3Url!=null && data.mp3Url!="null"){
-                    content.innerHTML += '<li><img class="headImg " src="' + arrIcon[1] + '"><span><b style="color:#333;">'+ $("#name").val() +'：</b>' + data.answer + '<br/><audio controls="controls" src="'+ data.mp3Url +'">您的浏览器不支持audio音乐播放。</audio><i>' + Hour + ':' + Min + '</i></span></li>';
+                    content.innerHTML += '<li><img class="headImg " src="' + arrIcon[1] + '"><span><b style="color:#333;">'+ $("#name").val() +'：</b>' + data.response + '<br/><audio controls="controls" src="'+ data.mp3Url +'">您的浏览器不支持audio音乐播放。</audio><i>' + Hour + ':' + Min + '</i></span></li>';
                     iNow++;
                     img[iNow].className += 'imgleft';
                     span[iNow].className += 'spanleft';
                 }else if(data.skip_url!=null && data.skip_url!="null"){
                     window.location.href = data.skip_url
                 }else if(data.img_url!=null && data.img_url!="null"){
-                    content.innerHTML += '<li><img class="headImg " src="' + arrIcon[1] + '"><span><b style="color:#333;">'+ $("#name").val() +'：</b>' + data.answer + '<br/><img class="answerImg" src="'+ data.img_url +'?imageMogr2/thumbnail/300x300" alt="'+ data.img_url + '"  onclick="answerImgBig(this.alt)"/><i>' + Hour + ':' + Min + '</i></span></li>';
+                    content.innerHTML += '<li><img class="headImg " src="' + arrIcon[1] + '"><span><b style="color:#333;">'+ $("#name").val() +'：</b>' + data.response + '<br/><img class="answerImg" src="'+ data.img_url +'?imageMogr2/thumbnail/300x300" alt="'+ data.img_url + '"  onclick="answerImgBig(this.alt)"/><i>' + Hour + ':' + Min + '</i></span></li>';
                     iNow++;
                     img[iNow].className += 'imgleft';
                     span[iNow].className += 'spanleft';
@@ -311,12 +309,12 @@ function talks() {
                     for(var i=0;i<data.changeBooks.length;i++ ){
                         strBook +='<div class="changeBook1" ><img class="answerImg"  src="'+ data.changeBooks[i].picture +'?imageMogr2/thumbnail/300x300" alt="'+  data.changeBooks[i].picture + '"/></div><div class="changeBook2" ><h5>'+  data.changeBooks[i].name + '</h5><h6>作者：'+  data.changeBooks[i].author + '</h6><h6 >分享者：'+  data.changeBooks[i].share + '</h6><h6 >价格：'+  data.changeBooks[i].price + '</h6></div><h6>简介：'+  data.changeBooks[i].synopsis + '</h6><br/>'
                     }
-                    content.innerHTML += '<li><img class="headImg " src="' + arrIcon[1] + '"><span><b style="color:#333;">'+ $("#name").val() +'：</b>' + data.answer + '<br/><br/><div >'+ strBook +'</div><i>' + Hour + ':' + Min + '</i></span></li>';
+                    content.innerHTML += '<li><img class="headImg " src="' + arrIcon[1] + '"><span><b style="color:#333;">'+ $("#name").val() +'：</b>' + data.response + '<br/><br/><div >'+ strBook +'</div><i>' + Hour + ':' + Min + '</i></span></li>';
                     iNow++;
                     img[iNow].className += 'imgleft';
                     span[iNow].className += 'spanleft';
                 } else {
-                    // content.innerHTML += '<li><img  class="headImg "  src="' + arrIcon[1] + '"><span><b style="color:#333;">'+ $("#name").val() +'：</b>' + data.answer + '<i>' + Hour + ':' + Min + '</i></span></li>';
+                    // content.innerHTML += '<li><img  class="headImg "  src="' + arrIcon[1] + '"><span><b style="color:#333;">'+ $("#name").val() +'：</b>' + data.response + '<i>' + Hour + ':' + Min + '</i></span></li>';
                     // iNow++;
                     // img[iNow].className += 'imgleft';
                     // span[iNow].className += 'spanleft';
@@ -327,7 +325,7 @@ function talks() {
             '<div class="m-l-xxl-f">'+
             '<div class="pos-rlt wrapper b b-light r r-2x">'+
             '<span class="arrow left pull-up"></span>'+
-            '<p class="m-b-none">' + data.answer + ' </p>'+
+            '<p class="m-b-none">' + data.response + ' </p>'+
             '</div>'+
             '<small class="text-muted" style="float:right;"><i class="fa fa-ok text-success"></i> ' + Hour + ':' + Min + '</small>'+
             '</div>'+
@@ -358,9 +356,9 @@ function newYearRobotTalks() {
     CSH_GZ();
     getCode();
     var arrIcon = ['//j.kuaiduodian.com/assets/global/images/avatar.png', '//j.kuaiduodian.com/assets/global/images/avatar.png'];
-    if($('#headPortrait').val()!="" && $('#headPortrait').val()!="None"){
-        arrIcon[1]=$('#headPortrait').val()+'/thumbnail/100x100';
-    }
+    // if($('#headPortrait').val()!="" && $('#headPortrait').val()!="None"){
+    //     arrIcon[1]=$('#headPortrait').val()+'/thumbnail/100x100';
+    // }
     var iNow = -1;    //用来累加改变左右浮动
     var btn = document.getElementById('btn');
     var text = document.getElementById('text');
@@ -433,22 +431,20 @@ function newYearRobotTalks() {
                 enable: $("#enable").val()
             };
             $.ajax({
-                type: "POST",
-                contentType: "application/json",
-                url: '/api/chat/info',
-                data: JSON.stringify(ques)
+             type: "get",
+                url: '/api_chat/get_response',
+                data: { user_input: question }
             }).done(function (data) {
-                var data = JSON.parse(data);
-
+        var data = {'response':data.response};//JSON.parse(data);
                 if (data.mp3Url!=null && data.mp3Url!="null"){
-                    content.innerHTML += '<li><img class="headImg " src="' + arrIcon[1] + '"><span><b style="color:#333;">'+ $("#name").val() +'：</b>' + data.answer + '<br/><audio controls="controls" src="'+ data.mp3Url +'">您的浏览器不支持audio音乐播放。</audio><i>' + Hour + ':' + Min + '</i></span></li>';
+                    content.innerHTML += '<li><img class="headImg " src="' + arrIcon[1] + '"><span><b style="color:#333;">'+ $("#name").val() +'：</b>' + data.response + '<br/><audio controls="controls" src="'+ data.mp3Url +'">您的浏览器不支持audio音乐播放。</audio><i>' + Hour + ':' + Min + '</i></span></li>';
                     iNow++;
                     img[iNow].className += 'imgleft';
                     span[iNow].className += 'spanleft';
                 }else if(data.skip_url!=null && data.skip_url!="null"){
                     window.location.href = data.skip_url
                 }else if(data.img_url!=null && data.img_url!="null"){
-                    content.innerHTML += '<li><img class="headImg " src="' + arrIcon[1] + '"><span><b style="color:#333;">'+ $("#name").val() +'：</b>' + data.answer + '<br/><img class="answerImg" src="'+ data.img_url +'?imageMogr2/thumbnail/300x300" alt="'+ data.img_url + '"  onclick="answerImgBig(this.alt)"/><i>' + Hour + ':' + Min + '</i></span></li>';
+                    content.innerHTML += '<li><img class="headImg " src="' + arrIcon[1] + '"><span><b style="color:#333;">'+ $("#name").val() +'：</b>' + data.response + '<br/><img class="answerImg" src="'+ data.img_url +'?imageMogr2/thumbnail/300x300" alt="'+ data.img_url + '"  onclick="answerImgBig(this.alt)"/><i>' + Hour + ':' + Min + '</i></span></li>';
                     iNow++;
                     img[iNow].className += 'imgleft';
                     span[iNow].className += 'spanleft';
@@ -457,12 +453,12 @@ function newYearRobotTalks() {
                     for(var i=0;i<data.changeBooks.length;i++ ){
                         strBook +='<div class="changeBook1" ><img class="answerImg"  src="'+ data.changeBooks[i].picture +'?imageMogr2/thumbnail/300x300" alt="'+  data.changeBooks[i].picture + '"/></div><div class="changeBook2" ><h5>'+  data.changeBooks[i].name + '</h5><h6>作者：'+  data.changeBooks[i].author + '</h6><h6 >分享者：'+  data.changeBooks[i].share + '</h6><h6 >价格：'+  data.changeBooks[i].price + '</h6></div><div style="clear: both"></div><h6>简介：'+  data.changeBooks[i].synopsis + '</h6><br/>'
                     }
-                    content.innerHTML += '<li><img class="headImg " src="' + arrIcon[1] + '"><span><b style="color:#333;">'+ $("#name").val() +'：</b>' + data.answer + '<br/><br/><div >'+ strBook +'</div><i>' + Hour + ':' + Min + '</i></span></li>';
+                    content.innerHTML += '<li><img class="headImg " src="' + arrIcon[1] + '"><span><b style="color:#333;">'+ $("#name").val() +'：</b>' + data.response + '<br/><br/><div >'+ strBook +'</div><i>' + Hour + ':' + Min + '</i></span></li>';
                     iNow++;
                     img[iNow].className += 'imgleft';
                     span[iNow].className += 'spanleft';
                 }else {
-                    // content.innerHTML += '<li><img  class="headImg "  src="' + arrIcon[1] + '"><span><b style="color:#333;">'+ $("#name").val() +'：</b>' + data.answer + '<i>' + Hour + ':' + Min + '</i></span></li>';
+                    // content.innerHTML += '<li><img  class="headImg "  src="' + arrIcon[1] + '"><span><b style="color:#333;">'+ $("#name").val() +'：</b>' + data.response + '<i>' + Hour + ':' + Min + '</i></span></li>';
                     // iNow++;
                     // img[iNow].className += 'imgleft';
                     // span[iNow].className += 'spanleft';
@@ -475,7 +471,7 @@ function newYearRobotTalks() {
             '<div class="m-l-xxl-f">'+
             '<div class="pos-rlt wrapper b b-light r r-2x">'+
             '<span class="arrow left pull-up"></span>'+
-            '<p class="m-b-none">' + data.answer + ' </p>'+
+            '<p class="m-b-none">' + data.response + ' </p>'+
             '</div>'+
             '<small class="text-muted" style="float:right;"><i class="fa fa-ok text-success"></i> ' + Hour + ':' + Min + '</small>'+
             '</div>'+
@@ -532,21 +528,20 @@ function newYearRobotTalks() {
             enable: $("#enable").val()
         };
         $.ajax({
-            type: "POST",
-            contentType: "application/json",
-            url: '/api/chat/info',
-            data: JSON.stringify(ques)
+             type: "get",
+                url: '/api_chat/get_response',
+                data: { user_input: question }
         }).done(function (data) {
-            var data = JSON.parse(data);
+        var data = {'response':data.response};//JSON.parse(data);
             if (data.mp3Url!=null && data.mp3Url!="null"){
-                content.innerHTML += '<li><img class="headImg " src="' + arrIcon[1] + '"><span><b style="color:#333;">'+ $("#name").val() +'：</b>' + data.answer + '<br/><audio controls="controls" src="'+ data.mp3Url +'">您的浏览器不支持audio音乐播放。</audio><i>' + Hour + ':' + Min + '</i></span></li>';
+                content.innerHTML += '<li><img class="headImg " src="' + arrIcon[1] + '"><span><b style="color:#333;">'+ $("#name").val() +'：</b>' + data.response + '<br/><audio controls="controls" src="'+ data.mp3Url +'">您的浏览器不支持audio音乐播放。</audio><i>' + Hour + ':' + Min + '</i></span></li>';
                 iNow++;
                 img[iNow].className += 'imgleft';
                 span[iNow].className += 'spanleft';
             }else if(data.skip_url!=null && data.skip_url!="null"){
                 window.location.href = data.skip_url
             }else if(data.img_url!=null && data.img_url!="null"){
-                content.innerHTML += '<li><img class="headImg " src="' + arrIcon[1] + '"><span><b style="color:#333;">'+ $("#name").val() +'：</b>' + data.answer + '<br/><img class="answerImg" src="'+ data.img_url +'?imageMogr2/thumbnail/300x300" alt="'+ data.img_url + '"  onclick="answerImgBig(this.alt)"/><i>' + Hour + ':' + Min + '</i></span></li>';
+                content.innerHTML += '<li><img class="headImg " src="' + arrIcon[1] + '"><span><b style="color:#333;">'+ $("#name").val() +'：</b>' + data.response + '<br/><img class="answerImg" src="'+ data.img_url +'?imageMogr2/thumbnail/300x300" alt="'+ data.img_url + '"  onclick="answerImgBig(this.alt)"/><i>' + Hour + ':' + Min + '</i></span></li>';
                 iNow++;
                 img[iNow].className += 'imgleft';
                 span[iNow].className += 'spanleft';
@@ -555,12 +550,12 @@ function newYearRobotTalks() {
                 for(var i=0;i<data.changeBooks.length;i++ ){
                     strBook +='<div class="changeBook1" ><img class="answerImg"  src="'+ data.changeBooks[i].picture +'?imageMogr2/thumbnail/300x300" alt="'+  data.changeBooks[i].picture + '"/></div><div class="changeBook2" ><h5>'+  data.changeBooks[i].name + '</h5><h6>作者：'+  data.changeBooks[i].author + '</h6><h6 >分享者：'+  data.changeBooks[i].share + '</h6><h6 >价格：'+  data.changeBooks[i].price + '</h6></div><h6>简介：'+  data.changeBooks[i].synopsis + '</h6><br/>'
                 }
-                content.innerHTML += '<li><img class="headImg " src="' + arrIcon[1] + '"><span><b style="color:#333;">'+ $("#name").val() +'：</b>' + data.answer + '<br/><br/><div >'+ strBook +'</div><i>' + Hour + ':' + Min + '</i></span></li>';
+                content.innerHTML += '<li><img class="headImg " src="' + arrIcon[1] + '"><span><b style="color:#333;">'+ $("#name").val() +'：</b>' + data.response + '<br/><br/><div >'+ strBook +'</div><i>' + Hour + ':' + Min + '</i></span></li>';
                 iNow++;
                 img[iNow].className += 'imgleft';
                 span[iNow].className += 'spanleft';
             } else {
-                content.innerHTML += '<li><img  class="headImg "  src="' + arrIcon[1] + '"><span><b style="color:#333;">'+ $("#name").val() +'：</b>' + data.answer + '<i>' + Hour + ':' + Min + '</i></span></li>';
+                content.innerHTML += '<li><img  class="headImg "  src="' + arrIcon[1] + '"><span><b style="color:#333;">'+ $("#name").val() +'：</b>' + data.response + '<i>' + Hour + ':' + Min + '</i></span></li>';
                 iNow++;
                 img[iNow].className += 'imgleft';
                 span[iNow].className += 'spanleft';

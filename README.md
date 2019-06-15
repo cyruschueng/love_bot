@@ -10,7 +10,8 @@
  
 
 恋爱聊天机器人,让你更懂的和男生和女生聊天，看看恋爱机器人是如何聊天的，最高效的提高你的情商。^_^哈啊哈
-
+测试地址<a href="https://lucky.kuaiduodian.com/love_bot/web/index.html">网页版恋爱机器人</a>
+<img src="./scraper/chat.gif" title="Logo"  width="300">
 
 ### 特性：
  
@@ -60,7 +61,7 @@
  
 
 
- ## 网络爬取了2万个对话
+ ## 网络爬取了3千个对话（每晚凌晨2自动爬取5小时更新会话库)
 --------------------
 ![](./scraper/get1.png)
 

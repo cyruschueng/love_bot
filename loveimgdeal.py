@@ -12,6 +12,9 @@ import os
 import detect_model
 import imghdr
 import time
+import sys
+
+print(sys.argv);
 deepThought = ChatBot("deepThought" ,
     logic_adapters=[
         {
@@ -41,23 +44,27 @@ response = deepThought.get_response('Arron')
 i=0
 print(response);
 print(response.text);
-for parent,dirnames,filenames in os.walk(rootdir):
-    for filename in filenames:
-        tmpf = os.path.join(parent,filename);
-        print( "the full name of the file is: " + tmpf)
-        if 'tmp_' in tmpf:
-            continue
-        imgType = imghdr.what(tmpf)
-        if imgType!='jpeg' and imgType!='png' :
-            continue
-        try:
-            trainer.train(detect_model.find_conversation(tmpf,rootdir))
-        except OSError:
-            pass
-        i+=1
-        time.sleep(1)
-        print(i)
+
+if len(sys.argv)==1:
+    print('qqqqqqqqqqqqqqqqqqq')
+    for parent,dirnames,filenames in os.walk(rootdir):
+        for filename in filenames:
+            tmpf = os.path.join(parent,filename);
+            print( "the full name of the file is: " + tmpf)
+            if 'tmp_' in tmpf:
+                continue
+            imgType = imghdr.what(tmpf)
+            if imgType!='jpeg' and imgType!='png' :
+                continue
+            try:
+                trainer.train(detect_model.find_conversation(tmpf,rootdir))
+            except OSError:
+                pass
+            i+=1
+            time.sleep(1)
+            print(i)
 @hug.get()
 def get_response(user_input):
     response = deepThought.get_response(user_input).text
+    print(response)
     return {"response":response}
